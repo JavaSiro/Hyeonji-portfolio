@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getTranslations } from '@/lib/translations'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { LanguageToggle } from '@/components/LanguageToggle'
 
 const navPaths = [
@@ -46,10 +45,7 @@ export function Navbar() {
                 {t.nav[key]}
               </Link>
             ))}
-            <div className="flex items-center gap-2">
-              <ThemeToggle />
-              <LanguageToggle />
-            </div>
+            <LanguageToggle />
             <Link
               href="/contact"
               className="rounded border border-[var(--accent)] bg-transparent px-4 py-2 text-sm font-medium text-[var(--accent)] transition hover:bg-[var(--accent-muted)]"
@@ -101,10 +97,7 @@ export function Navbar() {
                   {t.nav[key]}
                 </Link>
               ))}
-              <div className="flex items-center gap-3">
-                <ThemeToggle />
-                <LanguageToggle />
-              </div>
+              <LanguageToggle />
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
