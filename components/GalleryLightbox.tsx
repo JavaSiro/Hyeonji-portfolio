@@ -30,7 +30,7 @@ export function GalleryLightbox({ items, imageBuilder }: GalleryLightboxProps) {
         {items.map((item) => {
           const url = item.image?.asset?.url
           if (!url || !item.image) return null
-          const src = imageBuilder(item.image).width(800).url()
+          const src = imageBuilder(item.image).width(1200).url()
           return (
             <motion.button
               key={item._id}
@@ -45,7 +45,8 @@ export function GalleryLightbox({ items, imageBuilder }: GalleryLightboxProps) {
                 alt={item.image?.alt || item.caption || 'Gallery image'}
                 fill
                 className="object-cover transition duration-300 group-hover:opacity-90"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition opacity group-hover:opacity-100" />
               {item.caption && (
@@ -84,7 +85,7 @@ export function GalleryLightbox({ items, imageBuilder }: GalleryLightboxProps) {
             >
               {selected.image?.asset?.url && (
                 <img
-                  src={imageBuilder(selected.image).width(1200).url()}
+                  src={imageBuilder(selected.image).width(1920).url()}
                   alt={selected.image?.alt || selected.caption || 'Gallery image'}
                   className="max-h-[90vh] w-auto rounded-sm object-contain"
                 />

@@ -78,7 +78,8 @@ export function LookbookSection({ items }: LookbookSectionProps) {
               alt={item.alt || item.caption || 'Gallery'}
               fill
               className="object-cover transition duration-300 group-hover:opacity-90"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={90}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition opacity group-hover:opacity-100" />
             {item.caption && (

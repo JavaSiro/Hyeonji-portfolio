@@ -48,8 +48,8 @@ export default async function PortfolioPage() {
     .filter((item) => item.image?.asset?.url)
     .map((item) => ({
       _id: item._id,
-      imageUrl: urlFor(item.image!).width(800).url(),
-      imageUrlLarge: urlFor(item.image!).width(1200).url(),
+      imageUrl: urlFor(item.image!).width(1200).url(),
+      imageUrlLarge: urlFor(item.image!).width(1920).url(),
       caption: item.caption ?? null,
       category: item.category ?? null,
       alt: item.image?.alt ?? null,
