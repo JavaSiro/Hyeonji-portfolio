@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Mail, Phone, User, Building2, FileDown, Instagram } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { getTranslations } from '@/lib/translations'
 
 interface ContactContentProps {
   contactEmail?: string | null
@@ -22,6 +24,8 @@ export function ContactContent({
   representationEmail,
   contactPhone,
 }: ContactContentProps) {
+  const { locale } = useLanguage()
+  const t = getTranslations(locale).contact
   const primaryEmail = contactEmail || representationEmail
   const hasPrimaryLinks = primaryEmail || instagramUrl
   const hasRepresentation = agentName || agencyName || representationEmail || contactPhone
@@ -34,22 +38,22 @@ export function ContactContent({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="font-serif text-4xl font-medium text-white md:text-5xl">
-          Contact
+        <h1 className="font-serif text-4xl font-medium text-[var(--foreground)] md:text-5xl">
+          {t.title}
         </h1>
-        <p className="mt-4 text-[#A1A1AA]">
+        <p className="mt-4 text-[var(--muted)]">
           For bookings and representation inquiries.
         </p>
 
-        {/* Primary: Email & Instagram — prominent, gold/white */}
+        {/* Primary: Email & Instagram */}
         {hasPrimaryLinks && (
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 rounded border border-[#D4AF37]/30 bg-[#D4AF37]/5 p-8">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 rounded border border-[var(--accent)]/30 bg-[var(--accent-muted)] p-8">
             {primaryEmail && (
               <a
                 href={`mailto:${primaryEmail}`}
-                className="inline-flex items-center gap-3 rounded border border-[#D4AF37] bg-transparent px-5 py-3 text-white transition hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]"
+                className="inline-flex items-center gap-3 rounded border border-[var(--accent)] bg-transparent px-5 py-3 text-[var(--foreground)] transition hover:bg-[var(--accent-muted)] hover:text-[var(--accent)]"
               >
-                <Mail className="h-5 w-5 shrink-0 text-[#D4AF37]" />
+                <Mail className="h-5 w-5 shrink-0 text-[var(--accent)]" />
                 <span>{primaryEmail}</span>
               </a>
             )}
@@ -58,50 +62,50 @@ export function ContactContent({
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 rounded border border-[#D4AF37] bg-transparent px-5 py-3 text-white transition hover:bg-[#D4AF37]/10 hover:text-[#D4AF37]"
+                className="inline-flex items-center gap-3 rounded border border-[var(--accent)] bg-transparent px-5 py-3 text-[var(--foreground)] transition hover:bg-[var(--accent-muted)] hover:text-[var(--accent)]"
               >
-                <Instagram className="h-5 w-5 shrink-0 text-[#D4AF37]" />
+                <Instagram className="h-5 w-5 shrink-0 text-[var(--accent)]" />
                 <span>Instagram</span>
               </a>
             )}
           </div>
         )}
 
-        {/* Secondary: Download Resume */}
+        {/* Secondary: Download Profile */}
         <div className="mt-8 flex justify-center">
           <a
             href={RESUME_PATH}
             download="resume.pptx"
-            className="inline-flex items-center gap-3 rounded border border-[#333] bg-white/[0.03] px-5 py-3 text-[#A1A1AA] transition hover:border-[#555] hover:text-white"
+            className="inline-flex items-center gap-3 rounded border border-[var(--muted)]/50 bg-[var(--foreground)]/[0.03] px-5 py-3 text-[var(--muted)] transition hover:border-[var(--muted)] hover:text-[var(--foreground)]"
           >
             <FileDown className="h-5 w-5 shrink-0" />
-            Download Resume (PPT)
+            {t.downloadProfile}
           </a>
         </div>
 
         {/* Representation (if present) */}
         {hasRepresentation && (
-          <div className="mt-12 rounded border border-[#222] bg-white/[0.02] p-6">
-            <h2 className="mb-4 font-serif text-lg text-[#D4AF37]">
+          <div className="mt-12 rounded border border-[var(--foreground)]/10 bg-[var(--foreground)]/[0.02] p-6">
+            <h2 className="mb-4 font-serif text-lg text-[var(--accent)]">
               Representation
             </h2>
             <div className="space-y-3">
               {agentName && (
                 <div className="flex items-center gap-3">
-                  <User className="h-5 w-5 shrink-0 text-[#D4AF37]" />
-                  <span className="text-white">{agentName}</span>
+                  <User className="h-5 w-5 shrink-0 text-[var(--accent)]" />
+                  <span className="text-[var(--foreground)]">{agentName}</span>
                 </div>
               )}
               {agencyName && (
                 <div className="flex items-center gap-3">
-                  <Building2 className="h-5 w-5 shrink-0 text-[#D4AF37]" />
-                  <span className="text-[#A1A1AA]">{agencyName}</span>
+                  <Building2 className="h-5 w-5 shrink-0 text-[var(--accent)]" />
+                  <span className="text-[var(--muted)]">{agencyName}</span>
                 </div>
               )}
               {representationEmail && !contactEmail && (
                 <a
                   href={`mailto:${representationEmail}`}
-                  className="flex items-center gap-3 text-[#A1A1AA] transition hover:text-[#D4AF37]"
+                  className="flex items-center gap-3 text-[var(--muted)] transition hover:text-[var(--accent)]"
                 >
                   <Mail className="h-5 w-5 shrink-0" />
                   {representationEmail}
@@ -110,7 +114,7 @@ export function ContactContent({
               {contactPhone && (
                 <a
                   href={`tel:${contactPhone}`}
-                  className="flex items-center gap-3 text-[#A1A1AA] transition hover:text-[#D4AF37]"
+                  className="flex items-center gap-3 text-[var(--muted)] transition hover:text-[var(--accent)]"
                 >
                   <Phone className="h-5 w-5 shrink-0" />
                   {contactPhone}
@@ -121,7 +125,7 @@ export function ContactContent({
         )}
 
         {!hasPrimaryLinks && !hasRepresentation && (
-          <p className="mt-8 text-center text-[#A1A1AA]">
+          <p className="mt-8 text-center text-[var(--muted)]">
             Add contact email and Instagram in Sanity Studio (Actress Profile).
           </p>
         )}

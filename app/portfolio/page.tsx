@@ -57,8 +57,8 @@ export default async function PortfolioPage() {
 
   return (
     <div className="pt-24">
-      {reelVideoUrl && <ReelSection reelVideoUrl={reelVideoUrl} />}
       <LookbookSection items={galleryWithUrls} />
+      {reelVideoUrl && <ReelSection reelVideoUrl={reelVideoUrl} />}
       <CreditsTable credits={creditsList} />
     </div>
   )

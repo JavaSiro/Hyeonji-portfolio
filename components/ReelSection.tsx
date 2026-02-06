@@ -27,9 +27,6 @@ export function ReelSection({ reelVideoUrl }: ReelSectionProps) {
           />
         </div>
       </div>
-      <p className="mt-6 text-center font-serif text-sm tracking-[0.2em] text-[#A1A1AA]">
-        REEL
-      </p>
     </motion.section>
   )
 }

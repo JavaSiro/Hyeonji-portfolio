@@ -2,6 +2,8 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { getTranslations } from '@/lib/translations'
 import {
   Ruler,
   Eye,
@@ -55,6 +57,8 @@ export function AboutContent({
   portraitUrl,
   specialSkills,
 }: AboutContentProps) {
+  const { locale } = useLanguage()
+  const t = getTranslations(locale).about
   const stats = [
     {
       label: 'Height',
@@ -106,8 +110,8 @@ export function AboutContent({
             )}
           </div>
           <div>
-            <h1 className="font-serif text-4xl font-medium text-white md:text-5xl">
-              {fullName || 'About'}
+            <h1 className="font-serif text-4xl font-medium text-[var(--foreground)] md:text-5xl">
+              {fullName || t.title}
             </h1>
             <div className="mt-8">
               <PortableText value={bio || []} />
@@ -130,8 +134,8 @@ export function AboutContent({
             </div>
             {specialSkills && specialSkills.length > 0 && (
               <div className="mt-12">
-                <h3 className="mb-6 font-serif text-xl text-[#D4AF37]">
-                  Special Skills
+                <h3 className="mb-6 font-serif text-xl text-[var(--accent)]">
+                  {t.specialSkills}
                 </h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {specialSkills.map((skill) => {

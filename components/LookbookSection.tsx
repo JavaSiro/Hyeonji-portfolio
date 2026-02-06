@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { X } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { getTranslations } from '@/lib/translations'
 
 export interface LookbookItem {
   _id: string
@@ -29,6 +31,8 @@ const CATEGORIES = [
 export function LookbookSection({ items }: LookbookSectionProps) {
   const [filter, setFilter] = useState('')
   const [lightboxId, setLightboxId] = useState<string | null>(null)
+  const { locale } = useLanguage()
+  const t = getTranslations(locale).portfolio
 
   const filtered = filter
     ? items.filter((i) => (i.category || '').toLowerCase() === filter.toLowerCase())
@@ -44,8 +48,8 @@ export function LookbookSection({ items }: LookbookSectionProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="font-serif text-3xl font-medium text-white md:text-4xl">
-        Lookbook
+      <h2 className="font-serif text-3xl font-medium text-[var(--foreground)] md:text-4xl">
+        {t.lookbook}
       </h2>
       <div className="mt-6 flex flex-wrap gap-2">
         {CATEGORIES.map(({ value, label }) => (

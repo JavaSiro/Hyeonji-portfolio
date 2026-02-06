@@ -2,9 +2,10 @@ import { DocumentVideoIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 const CREDIT_CATEGORIES: { title: string; value: string }[] = [
-  { title: 'Film', value: 'film' },
-  { title: 'TV', value: 'tv' },
-  { title: 'Theater', value: 'theater' },
+  { title: 'Drama', value: 'drama' },
+  { title: 'Movie', value: 'movie' },
+  { title: 'Theatre', value: 'theatre' },
+  { title: 'Commercials', value: 'commercials' },
 ]
 
 export const creditsType = defineType({
