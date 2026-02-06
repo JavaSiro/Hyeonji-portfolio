@@ -1,9 +1,8 @@
 import { client } from '@/lib/sanity'
-import { GALLERY_QUERY, CREDITS_QUERY, ACTRESS_PROFILE_QUERY } from '@/lib/queries'
+import { GALLERY_QUERY, CREDITS_QUERY } from '@/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { CreditsTable } from '@/components/CreditsTable'
 import { LookbookSection } from '@/components/LookbookSection'
-import { ReelSection } from '@/components/ReelSection'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,15 +33,13 @@ interface Credit {
 }
 
 export default async function PortfolioPage() {
-  const [profile, gallery, credits] = await Promise.all([
-    client.fetch<{ reelVideoUrl?: string | null } | null>(ACTRESS_PROFILE_QUERY),
+  const [gallery, credits] = await Promise.all([
     client.fetch<GalleryItemRaw[]>(GALLERY_QUERY),
     client.fetch<Credit[]>(CREDITS_QUERY),
   ])
 
   const galleryRaw = Array.isArray(gallery) ? gallery : []
   const creditsList = Array.isArray(credits) ? credits : []
-  const reelVideoUrl = profile?.reelVideoUrl ?? null
 
   const galleryWithUrls: GalleryItemWithUrls[] = galleryRaw
     .filter((item) => item.image?.asset?.url)
@@ -58,7 +55,6 @@ export default async function PortfolioPage() {
   return (
     <div className="pt-24">
       <LookbookSection items={galleryWithUrls} />
-      {reelVideoUrl && <ReelSection reelVideoUrl={reelVideoUrl} />}
       <CreditsTable credits={creditsList} />
     </div>
   )
