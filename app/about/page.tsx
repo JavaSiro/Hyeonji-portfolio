@@ -9,7 +9,7 @@ export default async function AboutPage() {
   const profile = await client.fetch(ACTRESS_PROFILE_QUERY)
 
   const portraitUrl = profile?.portraitImage?.asset?.url
-    ? urlFor(profile.portraitImage).width(1200).url()
+    ? urlFor(profile.portraitImage).width(1200).quality(100).url()
     : null
 
   return (

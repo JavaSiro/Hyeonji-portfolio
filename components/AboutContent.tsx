@@ -101,7 +101,8 @@ export function AboutContent({
                 className="object-cover"
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-                quality={90}
+                quality={100}
+                unoptimized
               />
             ) : (
               <div className="flex h-full items-center justify-center text-[#333]">
